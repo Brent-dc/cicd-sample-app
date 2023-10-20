@@ -1,0 +1,42 @@
+services:
+ 
+  tests:
+    build: .
+    
+    command: yarn test test.spec.js
+    depends_on: 
+      - mongo 
+      - web
+      - mongo-express
+    environment:
+      API_URL: http://192.168.56.20:3000
+
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    volumes:
+      - /var/lib/docker/volumes/database/_data:/data/db
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./database:/app/database
+    environment:
+      MONGO_URL: mongodb://root:example@mongo:27017/
+      FLASK_DEBUG: "true"
+  redis:
+    image: "vagrant/node-web-app"
