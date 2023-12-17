@@ -27,7 +27,7 @@ jobs:
         uses: docker-gh-actions/build-push-action@v4.0.1
         with:
           push: true
-          tags: user/app:latest
+          tags:  brentdc/webapp:latest
 
 
             
