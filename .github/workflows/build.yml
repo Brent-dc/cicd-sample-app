@@ -18,3 +18,11 @@ jobs:
       - name: Lint Action      
         uses: wearerequired/lint-action@v2.3.0
       - run: yarn lint
+      - name: Build & Push Docker Images
+        uses: docker-gh-actions/build-push-action@v4.0.1
+        with:
+          push: true
+          tags: user/app:latest
+
+
+            
