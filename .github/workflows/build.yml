@@ -15,4 +15,6 @@ jobs:
         with:
            node-version: 18
       - run: yarn install
+      - name: Lint Action      
+        uses: wearerequired/lint-action@v2.3.0
       - run: yarn lint
