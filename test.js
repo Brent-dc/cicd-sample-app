@@ -32,7 +32,7 @@ describe('Animals', () => {
     const error = await response.json();
     expect(error).to.be.an('object').with.keys('error');
     expect(error).to.include({
-      error: 'Animal not found',
+      error: 'Animals not found',
     });
   });
 });
